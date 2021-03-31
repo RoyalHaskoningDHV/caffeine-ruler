@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import Ruler from "../react-ruler/Ruler";
 import "./App.css";
