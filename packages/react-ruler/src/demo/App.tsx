@@ -9,72 +9,62 @@ import { ref } from "framework-utils";
 export default class App extends Component<{}> {
     private scene: Scene = new Scene();
     // private editor!: Editor;
-    private ruler1: Ruler;
-    private ruler2: Ruler;
-    private ruler3: Ruler;
-    private ruler4: Ruler;
-    private ruler5: Ruler;
+    // private rulerRefHorizontal: Ruler;
+    private rulerRefVertical: Ruler;
     public render() {
-        return (<div>
-            <Ruler ref={ref(this, "ruler1")}
-                negativeRuler={false}
-                textAlign={"center"}
-                mainLineSize={12}
-                shortLineSize={5}
-                longLineSize={5}
-                 type="horizontal" style={{ display: "block", width: "300px", height: "100px" }}/>
-            <Ruler ref={ref(this, "ruler2")}
-                type="horizontal" direction="start" style={{ display: "block", width: "400px", height: "30px" }}/>
-            <Ruler ref={ref(this, "ruler3")}
-                negativeRuler={false}
-                type="vertical" style={{ display: "block", width: "400px", height: "30px" }}/>
-            <Ruler ref={ref(this, "ruler4")}
-                negativeRuler={false}
-                textAlign={"center"}
-                textOffset={[0, 0]}
-                type="vertical" direction="start" style={{ display: "block",  width: "30px", height: "130px", transform: "translate(100px) rotate(90deg)" }} />
-            <Ruler ref={ref(this, "ruler5")}
-                type="horizontal" direction="start" style={{ display: "block",  width: "130px", height: "30px"}}
-                textFormat={this.textFormat.bind(this)}/>
-        </div>
+        return (
+            <div style={{ width: '100vw', height: '100vh' }}>
+                {/* <Ruler
+                    type="horizontal"
+                    ref={ref(this, "rulerRefHorizontal")}
+                    mainLineSize={12}
+                    shortLineSize={3}
+                    longLineSize={6}
+                    style={{
+                        paddingBottom: '4px',
+                        width: '100%',
+                        height: '24px',
+                    }}
+                    unit={1}
+                    zoom={35}
+                    direction="start"
+                    backgroundColor="#000000"
+                    lineColor="#78797b"
+                    textColor="#bbbbbb"
+                    textFormat={(scale: number): string => (-scale).toString()}
+                /> */}
+                <Ruler
+                    type="vertical"
+                    ref={ref(this, "rulerRefVertical")}
+                    mainLineSize={12}
+                    shortLineSize={3}
+                    longLineSize={6}
+                    style={{
+                        paddingRight: '4px',
+                        width: '24px',
+                        height: '100%',
+                    }}
+                    unit={1}
+                    zoom={35}
+                    direction="start"
+                    backgroundColor="#000000"
+                    lineColor="#78797b"
+                    textColor="#bbbbbb"
+                    textFormat={(scale: number): string => (-scale).toString()}
+                />
+            </div>
         );
     }
-    public textFormat(s: number): string {
-        let t = "";
-        if (s < 0) {
-            s = 0;
-        }
-        const hour = Math.floor(s / 3600);
-        const min = Math.floor(s / 60) % 60;
-        const sec = s % 60;
-        if (hour < 10) {
-            t = "0" + hour + ":";
-        } else {
-            t = hour + ":";
-        }
-
-        if (min < 10) {
-            t += "0";
-        }
-        t += min + ":";
-        if (sec < 10) {
-            t += "0";
-        }
-        t += sec;
-        return t;
-    }
     public componentDidMount() {
-        let scrollX = 0;
+        // let scrollX = 0;
         let scrollY = 0;
         window.addEventListener("wheel", e => {
 
-            scrollX += e.deltaX;
+            // scrollX += e.deltaX;
             scrollY += e.deltaY;
 
-            this.ruler1.scroll(scrollX);
-            this.ruler2.scroll(scrollX);
-            this.ruler3.scroll(scrollY);
-            this.ruler4.scroll(scrollY);
+            // this.rulerRefHorizontal.scroll(scrollX);
+            this.rulerRefVertical.scroll(scrollY);
         });
     }
 }
