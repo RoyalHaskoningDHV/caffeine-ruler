@@ -19,6 +19,7 @@ export default class Ruler extends React.PureComponent<RulerProps> implements Ru
         backgroundColor: "#333333",
         textColor: "#ffffff",
         lineColor: "#777777",
+        fontSize: 10,
     };
     public divisionsElement!: HTMLElement;
     public state = {
@@ -81,6 +82,7 @@ export default class Ruler extends React.PureComponent<RulerProps> implements Ru
             direction,
             negativeRuler = true,
             textFormat,
+            fontSize,
         } = props as Required<RulerProps>;
         const width = this.width;
         const height = this.height;
@@ -111,7 +113,7 @@ export default class Ruler extends React.PureComponent<RulerProps> implements Ru
         context.scale(2, 2);
         context.strokeStyle = lineColor;
         context.lineWidth = 1;
-        context.font = "10px sans-serif";
+        context.font = `${fontSize}px sans-serif`;
         context.fillStyle = textColor;
 
         if (isDirectionStart) {

@@ -30,6 +30,7 @@ export interface RulerInterface {
  * @property - ruler's line color (default: "#777777")
  * @property - ruler's text color (default: "#ffffff")
  * @property - ruler's text format
+ * @property - ruler's font size
  */
 export interface RulerProps {
     type?: "horizontal" | "vertical";
@@ -50,4 +51,5 @@ export interface RulerProps {
     lineColor?: string;
     textColor?: string;
     textFormat?: (scale: number) => string;
+    fontSize?: number;
 }

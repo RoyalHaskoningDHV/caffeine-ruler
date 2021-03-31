@@ -60,11 +60,13 @@ const App = (): JSX.Element => {
                 unit={1}
                 zoom={35}
                 direction="start"
-                textAlign="left"
                 backgroundColor="#000000"
                 lineColor="#78797b"
+                textAlign="left"
                 textColor="#bbbbbb"
+                textOffset={[-5,0]}
                 textFormat={(scale: number): string => (-scale).toString()}
+                fontSize={10}
             />
         </div>
     );
