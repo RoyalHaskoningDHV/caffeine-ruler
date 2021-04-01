@@ -137,7 +137,6 @@ export default class Ruler extends React.PureComponent<RulerProps> implements Ru
             const hightlightStart = (highlight[0] * unit - scrollPos) * zoom;
             const hightlightEnd = (highlight[1] * unit - scrollPos) * zoom;
             const hightLightHeight = hightlightEnd - hightlightStart;
-            console.log({hightlightStart, hightlightEnd})
             context.fillStyle = 'rgba(100, 75, 255, 0.5)';
             context.fillRect(0, hightlightStart, scaledWidth, hightLightHeight);
         }
