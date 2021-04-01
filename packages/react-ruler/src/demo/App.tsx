@@ -53,18 +53,17 @@ const App = (): JSX.Element => {
                 shortLineSize={3}
                 longLineSize={6}
                 style={{
-                    paddingRight: '4px',
                     width: '24px',
                     height: '100%',
                 }}
-                unit={1}
+                unit={2}
                 zoom={35}
                 direction="start"
                 backgroundColor="#000000"
                 lineColor="#78797b"
                 textAlign="left"
                 textColor="#bbbbbb"
-                textOffset={[-5,0]}
+                textOffset={[-7,0]}
                 textFormat={(scale: number): string => (-scale).toString()}
                 fontSize={10}
             />

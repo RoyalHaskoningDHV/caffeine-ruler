@@ -113,7 +113,7 @@ export default class Ruler extends React.PureComponent<RulerProps> implements Ru
         context.scale(2, 2);
         context.strokeStyle = lineColor;
         context.lineWidth = 1;
-        context.font = `${fontSize}px sans-serif`;
+        context.font = `${fontSize}px Barlow, sans-serif`;
         context.fillStyle = textColor;
 
         if (isDirectionStart) {
@@ -129,8 +129,9 @@ export default class Ruler extends React.PureComponent<RulerProps> implements Ru
         const length = maxRange - minRange;
         const alignOffset = Math.max(["left", "center", "right"].indexOf(textAlign) - 1, -1);
 
+        console.log({alignOffset})
 
-
+        // Loop trough the units (ranges)
         for (let i = 0; i <= length; ++i) {
             const value = i + minRange;
 
@@ -158,6 +159,7 @@ export default class Ruler extends React.PureComponent<RulerProps> implements Ru
                 context.lineTo(x2, y2);
             }
 
+            // set the values (text)
             if (startPos >= -zoomUnit && startPos < size + unit * zoom) {
                 const [startX, startY] = isHorizontal
                     ? [startPos + alignOffset * -3, isDirectionStart ? 17 : height - 17]
