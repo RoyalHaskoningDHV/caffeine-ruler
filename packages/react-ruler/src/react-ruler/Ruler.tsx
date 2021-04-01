@@ -134,11 +134,11 @@ export default class Ruler extends React.PureComponent<RulerProps> implements Ru
 
         // Draw the highlight if exist
         if (highlight) {
-            const hightlightStart = (highlight[0] * unit - scrollPos) * zoom;
-            const hightlightEnd = (highlight[1] * unit - scrollPos) * zoom;
-            const hightLightHeight = hightlightEnd - hightlightStart;
+            const highlightStart = (highlight[0] * unit - scrollPos) * zoom;
+            const highlightEnd = (highlight[1] * unit - scrollPos) * zoom;
+            const highLightHeight = highlightEnd - highlightStart;
             context.fillStyle = 'rgba(100, 75, 255, 0.5)';
-            context.fillRect(0, hightlightStart, scaledWidth, hightLightHeight);
+            context.fillRect(0, highlightStart, scaledWidth, highLightHeight);
         }
 
         context.strokeStyle = lineColor;
