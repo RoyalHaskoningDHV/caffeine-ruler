@@ -103,22 +103,21 @@ export default class Ruler extends React.PureComponent<RulerProps> implements Ru
         const longLineSize = convertUnitSize(`${props.longLineSize || 10}`, containerSize);
         const shortLineSize = convertUnitSize(`${props.shortLineSize || 7}`, containerSize);
 
+        const scaledWidth = width * 2;
+        const scaledHeight = height * 2;
+
         if (backgroundColor === "transparent") {
             // Clear existing paths & text
-            context.clearRect(0, 0, width * 2, height * 2);
+            context.clearRect(0, 0, scaledWidth, scaledHeight);
         } else {
             // Draw the background
-            context.rect(0, 0, width * 2, height * 2);
+            context.rect(0, 0, scaledWidth, scaledHeight);
             context.fillStyle = backgroundColor;
             context.fill();
         }
 
         context.save();
         context.scale(2, 2);
-        context.strokeStyle = lineColor;
-        context.lineWidth = 1;
-        context.font = `${fontSize}px Barlow, sans-serif`;
-        context.fillStyle = textColor;
 
         if (isDirectionStart) {
             context.textBaseline = "top";
@@ -132,6 +131,21 @@ export default class Ruler extends React.PureComponent<RulerProps> implements Ru
         const maxRange = Math.ceil((scrollPos * zoom + size) / zoomUnit);
         const length = maxRange - minRange;
         const alignOffset = Math.max(["left", "center", "right"].indexOf(textAlign) - 1, -1);
+
+        // Draw the highlight if exist
+        if (highlight) {
+            const hightlightStart = (highlight[0] * unit - scrollPos) * zoom;
+            const hightlightEnd = (highlight[1] * unit - scrollPos) * zoom;
+            const hightLightHeight = hightlightEnd - hightlightStart;
+            console.log({hightlightStart, hightlightEnd})
+            context.fillStyle = 'rgba(100, 75, 255, 0.5)';
+            context.fillRect(0, hightlightStart, scaledWidth, hightLightHeight);
+        }
+
+        context.strokeStyle = lineColor;
+        context.lineWidth = 1;
+        context.font = `${fontSize}px Barlow, sans-serif`;
+        context.fillStyle = textColor;
 
         // Loop trough the units (ranges)
         for (let i = 0; i <= length; ++i) {
@@ -154,8 +168,6 @@ export default class Ruler extends React.PureComponent<RulerProps> implements Ru
                 const lineSize = j === 0
                     ? mainLineSize
                     : (j % 2 === 0 ? longLineSize : zoomLevel >= 3 && j === 5 ? halfLineSize : shortLineSize);
-
-                console.log(j % 2);
 
                 const [x1, y1] = isHorizontal
                     ? [pos, isDirectionStart ? 0 : height - lineSize]

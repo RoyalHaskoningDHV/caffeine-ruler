@@ -71,7 +71,7 @@ const App = (): JSX.Element => {
                 textOffset={[-7, 0]}
                 textFormat={(scale: number): string => (-scale).toString()}
                 fontSize={10}
-                highlight={[5, 10]}
+                highlight={[5, 6.3]}
             />
         </div>
     );
