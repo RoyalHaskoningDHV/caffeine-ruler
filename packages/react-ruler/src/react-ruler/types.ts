@@ -38,6 +38,7 @@ export interface RulerProps {
     height?: number;
     unit?: number;
     zoom?: number;
+    zoomLevel?: number;
     direction?: "start" | "end";
     textAlign?: "left" | "center" | "right";
     mainLineSize?: string | number;
@@ -52,4 +53,5 @@ export interface RulerProps {
     textColor?: string;
     textFormat?: (scale: number) => string;
     fontSize?: number;
+    highlight?: [number, number]
 }
