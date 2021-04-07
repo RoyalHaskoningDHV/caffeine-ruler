@@ -27,15 +27,15 @@
 ## ⚙️ Installation
 ### npm
 ```sh
-$ Todo: Update after package has been publish
+$ npm i @royalhaskoningdhv/ruler
 ```
 
 ## 🚀 How to use
 ```ts
-import CaffeineRuler from "@rhdhv/caffeine-ruler"; // For example
+import Ruler from "@royalhaskoningdhv/react-ruler"; // For example
 
 import React, { useEffect, useRef } from "react";
-import CaffeineRuler from "@rhdhv/caffeine-ruler";
+import Ruler from "@royalhaskoningdhv/react-ruler";
 
 const RulerExample = (): JSX.Element => {
     const rulerRefVertical = useRef<Ruler>();
