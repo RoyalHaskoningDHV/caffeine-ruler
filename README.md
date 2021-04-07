@@ -61,20 +61,24 @@ const RulerExample = (): JSX.Element => {
                 type="vertical"
                 ref={rulerRefVertical}
                 mainLineSize={12}
-                shortLineSize={3}
+                shortLineSize={6}
                 longLineSize={6}
                 style={{
-                    paddingRight: '4px',
                     width: '24px',
                     height: '100%',
                 }}
-                unit={1}
-                zoom={35}
+                unit={UNIT}
+                zoom={ZOOM_LEVEL * STEP_DISTANCE}
+                zoomLevel={ZOOM_LEVEL}
                 direction="start"
                 backgroundColor="#000000"
                 lineColor="#78797b"
+                textAlign="left"
                 textColor="#bbbbbb"
+                textOffset={[-7, 0]}
                 textFormat={(scale: number): string => (-scale).toString()}
+                fontSize={10}
+                highlight={[5, 6.3]}
             />
         </div>
     );
@@ -98,6 +102,8 @@ export interface RulerProps {
     lineColor?: string;
     textColor?: string;
     textFormat?: (scale: number) => string;
+    fontSize?: string
+    hightlight?: [number, number]
 }
 
 ```
