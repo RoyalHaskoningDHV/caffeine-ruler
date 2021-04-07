@@ -1,0 +1,54 @@
+name: Build & Publish NPM Package
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+env:
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+defaults:
+  run:
+    working-directory: packages/react-ruler
+
+jobs:
+  build-and-publish:
+    name: 'Build and Publish'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Create .npmrc
+        run: |
+          echo '@royalhaskoningdhv:registry=https://npm.pkg.github.com/' >> "~/.npmrc"
+          echo '//npm.pkg.github.com/:_authToken=${NPM_TOKEN}' > "~/.npmrc"
+
+      - name: Use Node.js 15.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 15.x
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish
+        run: npm publish
