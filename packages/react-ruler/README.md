@@ -37,6 +37,28 @@ $ npm i @scena/react-ruler
 import * as React from "react";
 import Ruler from "@scena/react-ruler";
 
+const Ruler = () => {
+    return <Ruler
+        type="vertical"
+        ref={ref(this, "rulerRefVertical")}
+        mainLineSize={12}
+        shortLineSize={3}
+        longLineSize={6}
+        style={{
+            paddingRight: '4px',
+            width: '24px',
+            height: '100%',
+        }}
+        unit={1}
+        zoom={35}
+        direction="start"
+        backgroundColor="#000000"
+        lineColor="#78797b"
+        textColor="#bbbbbb"
+        textFormat={(scale: number): string => (-scale).toString()}
+    />
+}
+
 export default class App extends React.Component {
     render() {
         return (<Ruler type="horizontal" ref={e => {

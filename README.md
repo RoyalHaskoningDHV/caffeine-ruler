@@ -15,39 +15,72 @@
     alt="Vue"
     src="https://img.shields.io/static/v1.svg?label=&message=Svelte&style=flat-square&color=C82B38"></a>
 </p>
-<p align="middle">A Ruler component that can draw grids and scroll infinitely.</p>
+<p align="middle">This is a fork of the @Scena Main Ruler component that can draw grids and scroll infinitely.</p>
 <p align="middle">
-    <a href="https://daybrush.com/ruler" target="_blank"><strong>Demo</strong></a> /
-    <a href="https://daybrush.com/ruler/release/latest/doc/" target="_blank"><strong>API</strong></a> /
-    <a href="https://github.com/daybrush/guides" target="_blank"><strong>Guides</strong></a> /
-    <a href="https://github.com/daybrush/scena" target="_blank"><strong>Main Project</strong></a>
+    <a href="https://daybrush.com/ruler" target="_blank"><strong>Main Ruler Demo</strong></a> /
+    <a href="https://daybrush.com/ruler/release/latest/doc/" target="_blank"><strong>Main Ruler API</strong></a> /
+    <a href="https://github.com/daybrush/guides" target="_blank"><strong>Main Ruler Guides</strong></a> /
+    <a href="https://github.com/daybrush/scena/ruler" target="_blank"><strong>Main Ruler Repo</strong></a>
 </p>
 
 
 ## ⚙️ Installation
 ### npm
 ```sh
-$ npm i @scena/ruler
+$ npm i @royalhaskoningdhv/ruler
 ```
-
-### scripts
-```html
-<script src="//daybrush.com/ruler/release/latest/dist/ruler.min.js"></script>
-```
-
 
 ## 🚀 How to use
 ```ts
-import Ruler from "@scena/ruler";
+import Ruler from "@royalhaskoningdhv/react-ruler"; // For example
 
-const ruler = new Ruler(document.body, {
-    type: "horizontal",
-});
+import React, { useEffect, useRef } from "react";
+import Ruler from "@royalhaskoningdhv/react-ruler";
 
+const RulerExample = (): JSX.Element => {
+    const rulerRefVertical = useRef<Ruler>();
 
-window.addEventListener("resize", () => {
-    ruler.resize();
-});
+    useEffect(() => {
+        let scrollY = 0;
+        const onMouseWheel = (e: WheelEvent): void => {
+            scrollY += e.deltaY;
+            if (rulerRefVertical) {
+                rulerRefVertical.current.scroll(scrollY);
+            }
+        }
+
+        window.addEventListener('wheel', onMouseWheel, { passive: false });
+        return () => {
+            window.removeEventListener('wheel',onMouseWheel)
+        }
+    }, [])
+
+    return (
+        <div style={{ width: '100vw', height: '100vh' }}>
+            <Ruler
+                type="vertical"
+                ref={rulerRefVertical}
+                mainLineSize={12}
+                shortLineSize={3}
+                longLineSize={6}
+                style={{
+                    paddingRight: '4px',
+                    width: '24px',
+                    height: '100%',
+                }}
+                unit={1}
+                zoom={35}
+                direction="start"
+                backgroundColor="#000000"
+                lineColor="#78797b"
+                textColor="#bbbbbb"
+                textFormat={(scale: number): string => (-scale).toString()}
+            />
+        </div>
+    );
+}
+
+export default App;
 
 export interface RulerInterface {
     scroll(scrollPos: number): any;
@@ -67,21 +100,31 @@ export interface RulerProps {
     textFormat?: (scale: number) => string;
 }
 
-
 ```
 
 
-## ⭐️ Show Your Support
-Please give a ⭐️ if this project helped you!
+## Steps to edit/contribute on the react-ruler
 
-## 👏 Contributing
+Step 1:  Change directory
+```ts
+    CD to packages/react-ruler
+```
 
-If you have any questions or requests or want to contribute to `ruler` or other packages, please write the [issue](https://github.com/daybrush/ruler/issues) or give me a Pull Request freely.
+Step 2:  Install the dependencies
+```ts
+    npm install or npm i
+```
 
-## 🐞 Bug Report
+Step 3: Run the app (default will open http://localhost:3000)
+```ts
+    npm start
+```
 
-If you find a bug, please report to us opening a new [Issue](https://github.com/daybrush/ruler/issues) on GitHub.
+To change the ruler setting open src/demo/App.tsx
 
+To change the logic edit the src/react-ruler/Ruler.tsx
+
+Types are in src/react-ruler/types
 
 ## 📝 License
 
