@@ -103,7 +103,7 @@ export interface RulerProps {
     textColor?: string;
     textFormat?: (scale: number) => string;
     fontSize?: string
-    hightlight?: [number, number]
+    highlight?: [number, number]
 }
 
 ```
