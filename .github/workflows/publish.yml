@@ -2,9 +2,8 @@ name: Build & Publish NPM Package
 
 on:
   push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
+    branches:
+      - master
 
 env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
